@@ -275,7 +275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   moveAction: {fileID: -1680190386980627800, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   moveVector: {x: 0, y: 0, z: 0}
-  playerSpeed: 5
+  playerSpeed: 10
 --- !u!1001 &7914605976031602559
 PrefabInstance:
   m_ObjectHideFlags: 0
