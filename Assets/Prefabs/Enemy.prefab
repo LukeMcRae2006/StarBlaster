@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6621185082234421266}
   - component: {fileID: -4242254173165468640}
   - component: {fileID: 4710646729701281273}
+  - component: {fileID: -9107659101197328749}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -134,6 +135,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageDealer
   damage: 25
+--- !u!114 &-9107659101197328749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2231579353102341219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a08a5f03c12631c40b6193832d9192bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  health: 50
+  hitParticle: {fileID: 4732366948127488970, guid: 57ab0a52964129d4ebcb8a366d6effe2, type: 3}
 --- !u!1 &7961607212750602227
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,8 +253,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shooter
   projectilePrefab: {fileID: 3299621937321331208, guid: c99b60baa9cac884da6b08f888b67b49, type: 3}
-  speed: 10
-  timeTillDie: 5
-  fireRate: 3
+  projectileSpeed: 10
+  projectileLifetime: 5
+  baseFireRate: 0.2
   useAI: 1
+  minimumFireRate: 0.2
+  fireRateVariance: 0
   isFiring: 0

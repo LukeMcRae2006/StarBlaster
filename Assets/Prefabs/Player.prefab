@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   health: 50
+  hitParticle: {fileID: 4732366948127488970, guid: 57ab0a52964129d4ebcb8a366d6effe2, type: 3}
 --- !u!114 &3169799159320747994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,13 +136,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9f2f8e1ea9212c4786cecd92618f43f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  moveAction: {fileID: -1680190386980627800, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  moveVector: {x: 0, y: 0, z: 0}
-  playerSpeed: 10
-  leftPadding: 0
-  rightPadding: 0
-  upPadding: 0
-  downPadding: 0
+  moveSpeed: 10
+  leftBoundPadding: 0
+  rightBoundPadding: 0
+  upBoundPadding: 0
+  downBoundPadding: 0
 --- !u!114 &8575088345252419965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,9 +154,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shooter
   projectilePrefab: {fileID: 3299621937321331208, guid: 583843d1b39519c448ef9b160b5f56e1, type: 3}
-  speed: 10
-  timeTillDie: 5
-  fireRate: 1
+  projectileSpeed: 10
+  projectileLifetime: 5
+  baseFireRate: 0.2
+  useAI: 0
+  minimumFireRate: 0.2
+  fireRateVariance: 0
   isFiring: 0
 --- !u!1 &3235140781190237763
 GameObject:
