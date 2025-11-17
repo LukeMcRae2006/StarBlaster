@@ -1,0 +1,42 @@
+using UnityEngine;
+
+public class Pathfinding : MonoBehaviour
+{
+
+    EnemySpawner enemySpawner;
+    WaveConfigSO waveConfig;
+    Transform[] waypoints;
+    int waypointIndex = 0;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        enemySpawner = FindFirstObjectByType<EnemySpawner>();
+        waveConfig = enemySpawner.GetCurrentWave();
+        waypoints = waveConfig.GetWaypoints();
+        transform.position = waveConfig.GetStartingWaypoint().position;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        FollowPath();
+    }
+
+    void FollowPath()
+    {
+        if (waypointIndex < waypoints.Length)
+        {
+            Vector3 targetPos = waypoints[waypointIndex].position;
+            float moveDelta = waveConfig.GetEnemyMoveSpeed() * Time.deltaTime;
+            transform.position = Vector2.MoveTowards(transform.position, targetPos, moveDelta);
+            if (transform.position == targetPos)
+            {
+                waypointIndex++;
+            }
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+}

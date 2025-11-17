@@ -4,30 +4,57 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public InputActionReference moveAction;
-    public Vector3 moveVector;
-    public float playerSpeed;
-    Vector2 minBounds, maxBounds;
-    [SerializeField] private float leftPadding, rightPadding, upPadding, downPadding;
+    [SerializeField] float moveSpeed = 10f;
+    [SerializeField] float leftBoundPadding;
+    [SerializeField] float rightBoundPadding;
+    [SerializeField] float upBoundPadding;
+    [SerializeField] float downBoundPadding;
+
+    Shooter playerShooter;
+    InputAction moveAction;
+    InputAction fireAction;
+
+    Vector3 moveVector;
+    Vector2 minBounds;
+    Vector2 maxBounds;
 
     void Start()
+    {
+        playerShooter = GetComponent<Shooter>();
+
+        moveAction = InputSystem.actions.FindAction("Move");
+        fireAction = InputSystem.actions.FindAction("Attack");
+
+        InitBounds();
+    }
+
+    void Update()
+    {
+        MovePlayer();
+        FireShooter();
+    }
+
+    void InitBounds()
     {
         Camera mainCamera = Camera.main;
         minBounds = mainCamera.ViewportToWorldPoint(new Vector2(0, 0));
         maxBounds = mainCamera.ViewportToWorldPoint(new Vector2(1, 1));
     }
 
-    void Update()
+    void MovePlayer()
     {
-        Move();
-    }
+        moveVector = moveAction.ReadValue<Vector2>();
+        Vector3 newPos = transform.position + moveVector * moveSpeed * Time.deltaTime;
 
-    void Move()
-    {
-        moveVector = moveAction.action.ReadValue<Vector2>();
-        Vector3 newPos = transform.position + moveVector * playerSpeed * Time.deltaTime;
-        newPos.x = Math.Clamp(newPos.x, minBounds.x + leftPadding, maxBounds.x - rightPadding);
-        newPos.y = Math.Clamp(newPos.y, minBounds.y + downPadding, maxBounds.y - upPadding);
+        newPos.x = Math.Clamp(newPos.x, minBounds.x + leftBoundPadding, maxBounds.x - rightBoundPadding);
+        newPos.y = Math.Clamp(newPos.y, minBounds.y + downBoundPadding, maxBounds.y - upBoundPadding);
+
         transform.position = newPos;
     }
+
+    void FireShooter()
+    {
+        playerShooter.isFiring = fireAction.IsPressed();
+    }
+
 }
